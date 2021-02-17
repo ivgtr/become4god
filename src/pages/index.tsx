@@ -1,22 +1,22 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import seedColor from 'seed-color'
 import FingerprintJS from '@fingerprintjs/fingerprintjs'
 
 const Home = () => {
+  const [color, setColor] = useState<string>('')
+
   useEffect(() => {
     ;(async () => {
       const fp = await FingerprintJS.load()
 
       const result = await fp.get()
 
-      console.log(result.visitorId)
-
-      console.log(seedColor(result.visitorId).toHex())
+      setColor(seedColor(result.visitorId).toHex())
     })()
   }, [])
   return (
     <>
-      <p>test</p>
+      <p>{color}</p>
     </>
   )
 }
