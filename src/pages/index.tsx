@@ -1,31 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
-import seedColor from 'seed-color'
-import FingerprintJS from '@fingerprintjs/fingerprintjs'
-import User from '../components/User'
-import Canvas from '../components/Canvas'
+import { PageHeader } from '../components/PageHeader'
+import { PageContent } from '../components/PageContent'
 
-const Home = () => {
-  const [userColor, setUserColor] = useState<string>('')
-  useEffect(() => {
-    ;(async () => {
-      const result = await FingerprintJS.load().then((fp) => fp.get())
-
-      setUserColor(seedColor(result.visitorId).toHex())
-    })()
-  }, [])
-
-  if (!userColor) {
-    return null
-  }
+export default function Home() {
   return (
     <>
-      <User color={userColor} />
-      <div>
-        <Canvas />
-      </div>
+      <PageHeader />
+      <PageContent />
     </>
   )
 }
-
-export default Home

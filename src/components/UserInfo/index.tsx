@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { fromRGB } from 'everycolor'
 
-const User = (props: { color: string }) => {
+export const UserInfo: React.VFC<{ color: string }> = (props) => {
   const hex2rgb = (hex: string) => {
     if (hex.slice(0, 1) == '#') hex = hex.slice(1)
     if (hex.length == 3)
@@ -36,5 +36,3 @@ const User = (props: { color: string }) => {
     </>
   )
 }
-
-export default User
