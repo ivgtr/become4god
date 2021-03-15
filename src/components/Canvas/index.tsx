@@ -1,24 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react'
 import classes from './Canvas.module.css'
 
-export const Canvas = () => {
+export const Canvas: React.VFC<{ colors: string[][] }> = (props) => {
   const [colors, setColors] = useState<string[][]>([])
   const wrapperRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    const _arr: string[][] = []
-    const max = 128
-    for (let i = 0; i < max; i++) {
-      const narr: string[] = []
-
-      for (let j = 0; j < max; j++) {
-        narr.push('#fca')
-      }
-
-      _arr.push(narr)
-    }
-    setColors(_arr)
-  }, [])
+    setColors(props.colors)
+  }, [props.colors])
 
   useEffect(() => {
     const wrapperElement = wrapperRef.current
@@ -70,7 +59,7 @@ export const Canvas = () => {
 
   return (
     <>
-      <div className={`my-8 mx-auto ${classes.wrap}`} ref={wrapperRef} />
+      <div className={`my-8 mx-auto p-1 bg-white ${classes.wrap}`} ref={wrapperRef} />
     </>
   )
 }

@@ -21,17 +21,19 @@ export const PageContent = () => {
     ;(async () => {
       if (userColor) {
         const body = {
-          wdrftgylp: encodeURI(wdrftgylp)
+          wdrftgylp: encodeURI(wdrftgylp),
+          color: userColor,
+          x: Math.floor(Math.random() * 128),
+          y: Math.floor(Math.random() * 128)
         }
 
         const data = await axios
           .post('', { body })
           .then((response) => response.data)
-          .then((result) => {
+          .then<{ canvas: string[][] }>((result) => {
             return result
           })
-        console.log(data)
-        setColors([['#aaa']])
+        setColors(data.canvas)
       }
     })()
   }, [userColor])
@@ -41,7 +43,7 @@ export const PageContent = () => {
       {userColor && (
         <>
           <UserInfo color={userColor} />
-          <main>{colors.length > 0 && <Canvas />}</main>
+          <main>{colors.length > 0 && <Canvas colors={colors} />}</main>
         </>
       )}
     </Container>

@@ -32,7 +32,7 @@ export const UserInfo: React.VFC<{ color: string }> = (props) => {
   }
 
   return (
-    <div className="">
+    <div className="mx-4">
       {userName && (
         <p className="break-words" style={style}>
           {props.color} / {userName}
