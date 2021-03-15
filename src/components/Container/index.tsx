@@ -1,5 +1,5 @@
 import React from 'react'
 
 export const Container: React.FC = ({ children }) => {
-  return <div className="contaner mx-auto">{children}</div>
+  return <div className="container mx-auto">{children}</div>
 }

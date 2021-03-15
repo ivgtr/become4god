@@ -21,18 +21,23 @@ export const UserInfo: React.VFC<{ color: string }> = (props) => {
   const [userName, setUserName] = useState<string>('')
 
   useEffect(() => {
-    const hex = hex2rgb(props.color)
+    if (!props.color) return
 
+    const hex = hex2rgb(props.color)
     setUserName(fromRGB(hex[0], hex[1], hex[2]))
-  }, [])
+  }, [props.color])
 
   const style = {
     color: props.color
   }
 
   return (
-    <>
-      <p style={style}>{userName}</p>
-    </>
+    <div className="">
+      {userName && (
+        <p className="break-words" style={style}>
+          {props.color} / {userName}
+        </p>
+      )}
+    </div>
   )
 }

@@ -1,4 +1,11 @@
-.light {
-  padding: 0.5rem;
-  background-color: black;
+.wrap {
+  width: 70vw;
+  height: 70vw;
+}
+
+@media (min-width: 640px) {
+  .wrap {
+    width: 40rem;
+    height: 40rem;
+  }
 }
