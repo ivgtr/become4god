@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import classes from './Canvas.module.css'
 
 export const Canvas = () => {
-  const [arr, setArr] = useState<string[][]>([])
+  const [colors, setColors] = useState<string[][]>([])
   const wrapperRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export const Canvas = () => {
 
       _arr.push(narr)
     }
-    setArr(_arr)
+    setColors(_arr)
   }, [])
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export const Canvas = () => {
       sr.firstChild.remove()
     }
 
-    const maxColorValue = arr.length
+    const maxColorValue = colors.length
     const size = 100 / maxColorValue
 
     const df = document.createDocumentFragment()
@@ -55,7 +55,7 @@ export const Canvas = () => {
     // @ts-expect-error
     cell.style.contain = 'size layout paint'
 
-    arr.map((item, index) => {
+    colors.map((item, index) => {
       cell.style.top = `${size * index}%`
 
       item.map((color, index) => {
@@ -66,7 +66,7 @@ export const Canvas = () => {
       })
     })
     sr.append(df)
-  }, [arr])
+  }, [colors])
 
   return (
     <>
