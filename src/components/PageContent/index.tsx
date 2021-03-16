@@ -49,9 +49,7 @@ export const PageContent = () => {
     <Container>
       {userId && (
         <>
-          <div className="text-center">
-            <p>{colors.count} times played.</p>
-          </div>
+          <div className="text-center">{!!colors.count && <p>{colors.count} times played.</p>}</div>
           <UserInfo uid={userId} />
           <main className="my-8">
             <Canvas colors={colors.canvas} />
