@@ -1,41 +1,34 @@
 import React, { useEffect, useState } from 'react'
 
 import { fromRGB } from 'everycolor'
+import seedColor from 'seed-color'
 
-export const UserInfo: React.VFC<{ color: string }> = (props) => {
-  const hex2rgb = (hex: string) => {
-    if (hex.slice(0, 1) == '#') hex = hex.slice(1)
-    if (hex.length == 3)
-      hex =
-        hex.slice(0, 1) +
-        hex.slice(0, 1) +
-        hex.slice(1, 2) +
-        hex.slice(1, 2) +
-        hex.slice(2, 3) +
-        hex.slice(2, 3)
-
-    return [hex.slice(0, 2), hex.slice(2, 4), hex.slice(4, 6)].map((str) => {
-      return parseInt(str, 16)
-    })
-  }
+export const UserInfo: React.VFC<{ uid: string }> = (props) => {
+  const [color, setColor] = useState<string>('')
   const [userName, setUserName] = useState<string>('')
 
-  useEffect(() => {
-    if (!props.color) return
+  const clipbord = () => {}
 
-    const hex = hex2rgb(props.color)
-    setUserName(fromRGB(hex[0], hex[1], hex[2]))
-  }, [props.color])
+  useEffect(() => {
+    setColor(seedColor(props.uid).toHex())
+  }, [])
+
+  useEffect(() => {
+    if (!color) return
+
+    const hex = seedColor(props.uid).toRGB()
+    setUserName(fromRGB(hex.r, hex.g, hex.b))
+  }, [color])
 
   const style = {
-    color: props.color
+    color
   }
 
   return (
-    <div className="mx-4">
+    <div className="mx-4 text-center">
       {userName && (
-        <p className="break-words" style={style}>
-          {props.color} / {userName}
+        <p className="break-words" onClick={clipbord} style={style}>
+          {userName}
         </p>
       )}
     </div>

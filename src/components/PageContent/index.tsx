@@ -1,49 +1,61 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import seedColor from 'seed-color'
-import { parseCookies } from 'nookies'
+import { setCookie, parseCookies } from 'nookies'
+import uuid from 'uuid-random'
 
 import { UserInfo } from '../UserInfo'
 import { Canvas } from '../Canvas'
 import { Container } from '../Container'
 
-const wdrftgylp = 'くぁwせdrftgyふじこlp'
-
 export const PageContent = () => {
-  const [userColor, setUserColor] = useState<string>('')
-  const [colors, setColors] = useState<string[][]>([])
+  const [userId, setUserId] = useState<string>('')
+  const [colors, setColors] = useState<{ canvas: string[][]; count: number }>({
+    canvas: [],
+    count: 0
+  })
+  const cookies = parseCookies() as { wdrftgylp: string }
+  const url = process.env.END_POINT as string
+
   useEffect(() => {
-    const cookies = parseCookies() as { wdrftgylp: string }
-    setUserColor(seedColor(cookies.wdrftgylp).toHex())
+    setUserId(cookies.wdrftgylp || uuid())
   }, [])
 
   useEffect(() => {
     ;(async () => {
-      if (userColor) {
+      if (userId) {
         const body = {
-          wdrftgylp: encodeURI(wdrftgylp),
-          color: userColor,
+          wdrftgylp: cookies.wdrftgylp ? true : false,
+          color: seedColor(userId).toHex(),
           x: Math.floor(Math.random() * 128),
           y: Math.floor(Math.random() * 128)
         }
 
-        const data = await axios
-          .post('', { body })
+        await axios
+          .post(`${url}/canvas`, { body })
           .then((response) => response.data)
-          .then<{ canvas: string[][] }>((result) => {
-            return result
+          .then((result: { canvas: string[][]; count: number }) => {
+            setColors(result)
+            setCookie(null, 'wdrftgylp', userId, {
+              maxAge: 60 * 60 * 12,
+              path: '/'
+            })
           })
-        setColors(data.canvas)
       }
     })()
-  }, [userColor])
+  }, [userId])
 
   return (
     <Container>
-      {userColor && (
+      {userId && (
         <>
-          <UserInfo color={userColor} />
-          <main>{colors.length > 0 && <Canvas colors={colors} />}</main>
+          <div className="text-center">
+            <p>{colors.count} times played.</p>
+          </div>
+          <UserInfo uid={userId} />
+          <main className="my-8">
+            <Canvas colors={colors.canvas} />
+          </main>
         </>
       )}
     </Container>

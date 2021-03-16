@@ -59,7 +59,7 @@ export const Canvas: React.VFC<{ colors: string[][] }> = (props) => {
 
   return (
     <>
-      <div className={`my-8 mx-auto p-1 bg-white ${classes.wrap}`} ref={wrapperRef} />
+      <div className={`mx-auto p-1 bg-white ${classes.wrap}`} ref={wrapperRef} />
     </>
   )
 }

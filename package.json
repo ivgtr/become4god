@@ -1,5 +1,5 @@
 {
-  "name": "wonder-egg",
+  "name": "the-day-i-become-a-god",
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
@@ -9,12 +9,12 @@
     "proxy": "ngrok http 3000 --region jp"
   },
   "devDependencies": {
-    "@types/node": "^14.14.33",
+    "@types/node": "^14.14.35",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.2",
     "@vercel/node": "^1.9.1",
     "autoprefixer": "^10.2.5",
-    "eslint": "^7.21.0",
+    "eslint": "^7.22.0",
     "eslint-config-sumikko": "^0.3.0",
     "postcss": "^8.2.8",
     "sass": "^1.32.8",
@@ -24,10 +24,11 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
+    "@crcastle/html2canvas": "^1.0.0-rc.5-2",
     "@fingerprintjs/fingerprintjs": "^3.0.6",
     "axios": "^0.21.1",
     "everycolor": "^1.0.0-alpha.2",
-    "next": "^10.0.8",
+    "next": "^10.0.9",
     "nookies": "^2.5.2",
     "react": "^17.0.1",
     "react-cookie": "^4.0.3",
