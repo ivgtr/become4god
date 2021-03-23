@@ -15,14 +15,6 @@ export const Canvas: React.VFC<{ colors: string[][] }> = (props) => {
     if (!colors.length) return
     const wrapperElement = wrapperRef.current
     if (!wrapperElement) return
-    const sr =
-      wrapperElement.shadowRoot ||
-      wrapperElement.attachShadow({
-        mode: 'open'
-      })
-    while (sr.firstChild) {
-      sr.firstChild.remove()
-    }
 
     const maxColorValue = colors.length
     const size = 100 / maxColorValue
@@ -61,7 +53,7 @@ export const Canvas: React.VFC<{ colors: string[][] }> = (props) => {
         img.style.width = '100%'
         img.alt = `${new Date()} God`
         img.id = 'canvas'
-        sr.append(img)
+        wrapperElement.append(img)
       })
       .catch(function (error) {
         console.error('oops, something went wrong!', error)
