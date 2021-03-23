@@ -9,7 +9,6 @@
     "proxy": "ngrok http 3000 --region jp"
   },
   "devDependencies": {
-    "@types/dom-to-image": "^2.6.2",
     "@types/node": "^14.14.35",
     "@types/react": "^17.0.3",
     "@types/react-copy-to-clipboard": "^5.0.0",
@@ -28,7 +27,6 @@
   "dependencies": {
     "@fingerprintjs/fingerprintjs": "^3.0.6",
     "axios": "^0.21.1",
-    "dom-to-image": "^2.6.0",
     "everycolor": "^1.0.0-alpha.2",
     "next": "^10.0.9",
     "react": "^17.0.2",
