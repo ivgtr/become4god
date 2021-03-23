@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
+import { Circle } from '../Circle'
 import classes from './Canvas.module.css'
 
 export const Canvas: React.VFC<{ colors: string[][] }> = (props) => {
@@ -10,10 +11,11 @@ export const Canvas: React.VFC<{ colors: string[][] }> = (props) => {
   }, [props.colors])
 
   useEffect(() => {
+    console.log(colors.length)
+    if (!colors.length) return
+    console.log('null')
     const wrapperElement = wrapperRef.current
-    if (!wrapperElement) {
-      return
-    }
+    if (!wrapperElement) return
     const sr =
       wrapperElement.shadowRoot ||
       wrapperElement.attachShadow({
@@ -30,8 +32,10 @@ export const Canvas: React.VFC<{ colors: string[][] }> = (props) => {
     const spacer = document.createElement('div')
     spacer.style.width = '100%'
     spacer.style.height = '100%'
+    spacer.style.left = '0'
+    spacer.style.top = '0'
     spacer.style.margin = '0 auto'
-    spacer.style.position = 'relative'
+    spacer.style.position = 'absolute'
     df.append(spacer)
 
     const cell = document.createElement('div')
@@ -59,7 +63,12 @@ export const Canvas: React.VFC<{ colors: string[][] }> = (props) => {
 
   return (
     <>
-      <div className={`mx-auto p-1 bg-white ${classes.wrap}`} ref={wrapperRef} />
+      <div
+        className={`relative mx-auto p-1 bg-white grid items-center justify-center ${classes.wrap}`}
+        ref={wrapperRef}
+      >
+        <Circle />
+      </div>
     </>
   )
 }
