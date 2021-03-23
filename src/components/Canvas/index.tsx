@@ -59,7 +59,8 @@ export const Canvas: React.VFC<{ colors: string[][] }> = (props) => {
         const img = new Image()
         img.src = dataUrl
         img.style.width = '100%'
-        img.alt = `${new Date()}`
+        img.alt = `${new Date()} God`
+        img.id = 'canvas'
         sr.append(img)
       })
       .catch(function (error) {
