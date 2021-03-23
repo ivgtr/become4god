@@ -1,22 +1,32 @@
 import React, { useEffect, useState } from 'react'
 
 import { fromRGB } from 'everycolor'
-import seedColor from 'seed-color'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
-export const UserInfo: React.VFC<{ uid: string }> = (props) => {
-  const [color, setColor] = useState<string>('')
-  const [userName, setUserName] = useState<string>('')
+const toRGB = (hex: string) => {
+  if (hex.slice(0, 1) == '#') hex = hex.slice(1)
+  if (hex.length == 3)
+    hex =
+      hex.slice(0, 1) +
+      hex.slice(0, 1) +
+      hex.slice(1, 2) +
+      hex.slice(1, 2) +
+      hex.slice(2, 3) +
+      hex.slice(2, 3)
 
-  useEffect(() => {
-    setColor(seedColor(props.uid).toHex())
-  }, [])
+  return [hex.slice(0, 2), hex.slice(2, 4), hex.slice(4, 6)].map((str) => {
+    return parseInt(str, 16)
+  })
+}
+
+export const UserInfo: React.VFC<{ color: string }> = ({ color }) => {
+  const [userName, setUserName] = useState<string>('')
 
   useEffect(() => {
     if (!color) return
 
-    const hex = seedColor(props.uid).toRGB()
-    setUserName(fromRGB(hex.r, hex.g, hex.b))
+    const [r, g, b] = toRGB(color)
+    setUserName(fromRGB(r, g, b))
   }, [color])
 
   const style = {
