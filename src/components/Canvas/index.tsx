@@ -11,9 +11,7 @@ export const Canvas: React.VFC<{ colors: string[][] }> = (props) => {
   }, [props.colors])
 
   useEffect(() => {
-    console.log(colors.length)
     if (!colors.length) return
-    console.log('null')
     const wrapperElement = wrapperRef.current
     if (!wrapperElement) return
     const sr =

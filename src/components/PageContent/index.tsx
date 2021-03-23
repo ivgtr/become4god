@@ -6,6 +6,7 @@ import uuid from 'uuid-random'
 
 import { UserInfo } from '../UserInfo'
 import { Canvas } from '../Canvas'
+import { Description } from '../Description'
 import { Container } from '../Container'
 
 export const PageContent = () => {
@@ -49,11 +50,16 @@ export const PageContent = () => {
     <Container>
       {userId && (
         <>
-          <div className="text-center">{!!colors.count && <p>{colors.count} times played.</p>}</div>
           <UserInfo uid={userId} />
           <main className="my-8">
             <Canvas colors={colors.canvas} />
           </main>
+          <div className="text-center">
+            <p>
+              All users played <span className="font-bold">{colors.count} times</span>
+            </p>
+          </div>
+          <Description />
         </>
       )}
     </Container>

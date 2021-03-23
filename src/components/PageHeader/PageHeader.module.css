@@ -1,7 +1,27 @@
 .title {
+  position: relative;
+  z-index: 10;
   color: transparent;
   background: no-repeat center center/300% 300%
     linear-gradient(130deg, #1cc6b8, #3f3f94, #ec2757, #fcfc67, #eb6d71);
   -webkit-background-clip: text;
   background-clip: text;
+}
+
+.wrap {
+  position: relative;
+}
+.wrap::after {
+  position: absolute;
+  top: calc(50% - 2em);
+  right: -1em;
+  display: inline-block;
+  width: 4em;
+  height: 4em;
+  content: "";
+  background-color: #afa;
+  background-image: linear-gradient(-90deg, #8be4f0 50%, transparent 50%),
+    linear-gradient(#8be4f0 50%, transparent 50%);
+  background-size: 4px 4px;
+  border-radius: 50%;
 }
