@@ -28,7 +28,7 @@ export const PageContent = () => {
     ;(async () => {
       if (userColor) {
         const body = {
-          color: seedColor(userColor).toHex(),
+          color: userColor,
           x: Math.floor(Math.random() * 128),
           y: Math.floor(Math.random() * 128)
         }
