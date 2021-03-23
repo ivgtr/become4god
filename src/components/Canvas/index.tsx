@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
+import domtoimage from 'dom-to-image'
 import { Circle } from '../Circle'
 import classes from './Canvas.module.css'
 
@@ -26,15 +27,10 @@ export const Canvas: React.VFC<{ colors: string[][] }> = (props) => {
     const maxColorValue = colors.length
     const size = 100 / maxColorValue
 
-    const df = document.createDocumentFragment()
-    const spacer = document.createElement('div')
-    spacer.style.width = '100%'
-    spacer.style.height = '100%'
-    spacer.style.left = '0'
-    spacer.style.top = '0'
-    spacer.style.margin = '0 auto'
-    spacer.style.position = 'absolute'
-    df.append(spacer)
+    const df = document.createElement('div')
+    df.style.height = '640px'
+    df.style.width = '640px'
+    df.style.position = 'relative'
 
     const cell = document.createElement('div')
     cell.style.position = 'absolute'
@@ -53,19 +49,31 @@ export const Canvas: React.VFC<{ colors: string[][] }> = (props) => {
         cell.style.left = `${size * index}%`
         cell.style.backgroundColor = color
         const c = cell.cloneNode(false)
-        spacer.append(c)
+        df.append(c)
       })
     })
-    sr.append(df)
+
+    domtoimage
+      .toPng(df, { width: 640, height: 640 })
+      .then(function (dataUrl) {
+        const img = new Image()
+        img.src = dataUrl
+        img.style.width = '100%'
+        img.alt = `${new Date()}`
+        sr.append(img)
+      })
+      .catch(function (error) {
+        console.error('oops, something went wrong!', error)
+      })
   }, [colors])
 
   return (
     <>
       <div
-        className={`relative mx-auto p-1 bg-white grid items-center justify-center ${classes.wrap}`}
+        className={`relative mx-auto p-1 bg-white grid items-center justify-center overflow-hidden ${classes.wrap}`}
         ref={wrapperRef}
       >
-        <Circle />
+        {!colors.length && <Circle />}
       </div>
     </>
   )
