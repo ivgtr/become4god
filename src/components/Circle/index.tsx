@@ -1,5 +1,5 @@
-import React from 'react'
-import classes from './Circle.module.css'
+import React from "react";
+import classes from "./Circle.module.css";
 
 export const Circle: React.VFC = () => {
   return (
@@ -17,5 +17,5 @@ export const Circle: React.VFC = () => {
       <div className={`${classes.circle} ${classes.circle11}`}></div>
       <div className={`${classes.circle} ${classes.circle12}`}></div>
     </div>
-  )
-}
+  );
+};

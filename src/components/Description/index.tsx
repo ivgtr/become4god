@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 export const Description = () => {
   return (
@@ -6,5 +6,5 @@ export const Description = () => {
       <h3 className="text-2xl font-bold">What?</h3>
       <p>Your access, it draws a random color on the canvas in a random position.</p>
     </div>
-  )
-}
+  );
+};

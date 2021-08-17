@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 
-import { PageHeader } from '../components/PageHeader'
-import { PageFooter } from '../components/PageFooter'
-import { PageContent } from '../components/PageContent'
+import { PageHeader } from "../components/PageHeader";
+import { PageFooter } from "../components/PageFooter";
+import { PageContent } from "../components/PageContent";
 
 export default function Home() {
   return (
@@ -11,5 +11,5 @@ export default function Home() {
       <PageContent />
       <PageFooter />
     </div>
-  )
+  );
 }

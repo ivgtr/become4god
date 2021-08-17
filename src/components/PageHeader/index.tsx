@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 
-import classes from './PageHeader.module.css'
+import classes from "./PageHeader.module.css";
 
 export const PageHeader = () => {
   return (
@@ -11,5 +11,5 @@ export const PageHeader = () => {
         </h1>
       </header>
     </>
-  )
-}
+  );
+};
