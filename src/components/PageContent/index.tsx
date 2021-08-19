@@ -1,11 +1,17 @@
-import FingerprintJS from "@fingerprintjs/fingerprintjs";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import seedColor from "seed-color";
+import { v4 as uuid } from "uuid";
+import type { GodResponse, User } from "../../types/type";
 import { Canvas } from "../Canvas";
 import { Container } from "../Container";
 import { Description } from "../Description";
 import { UserInfo } from "../UserInfo";
+
+const readUser = (): User | undefined => {
+  const user = sessionStorage.getItem("user");
+  return user != null ? JSON.parse(user) : undefined;
+};
 
 export const PageContent = () => {
   const [userColor, setUserColor] = useState<string>("");
@@ -13,14 +19,16 @@ export const PageContent = () => {
     canvas: [],
     count: 0,
   });
-  const url = process.env.DB_HOST as string;
 
   useEffect(() => {
-    (async () => {
-      const result = await FingerprintJS.load().then((fp) => fp.get());
-
-      setUserColor(seedColor(result.visitorId).toHex());
-    })();
+    const user = readUser();
+    if (user) {
+      setUserColor(seedColor(user.id).toHex());
+    } else {
+      const id = uuid();
+      sessionStorage.setItem("user", JSON.stringify({ id }));
+      setUserColor(seedColor(id).toHex());
+    }
   }, []);
 
   useEffect(() => {
@@ -31,13 +39,17 @@ export const PageContent = () => {
           x: Math.floor(Math.random() * 128),
           y: Math.floor(Math.random() * 128),
         };
-
-        await axios
-          .post(`${url}/canvas`, { body })
-          .then((response) => response.data)
-          .then((result: { canvas: string[][]; count: number }) => {
-            setColors(result);
-          });
+        try {
+          await axios
+            .post("api/god", { body })
+            .then((response) => response.data)
+            .then((result: GodResponse) => {
+              console.log(result);
+              setColors(result);
+            });
+        } catch (err) {
+          console.log(err.response.status);
+        }
       }
     })();
   }, [userColor]);

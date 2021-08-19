@@ -14,12 +14,14 @@
     "@types/react": "^17.0.18",
     "@types/react-copy-to-clipboard": "^5.0.1",
     "@types/react-dom": "^17.0.9",
+    "@types/uuid": "^8.3.1",
     "@vercel/node": "^1.12.1",
     "autoprefixer": "^10.3.1",
     "eslint": "^7.32.0",
     "eslint-config-sumikko": "^1.2.2",
     "postcss": "^8.3.6",
     "prettier": "^2.3.2",
+    "prisma": "^2.29.1",
     "sass": "^1.38.0",
     "stylelint": "^13.13.1",
     "stylelint-config-sumikko": "^0.1.2",
@@ -28,12 +30,14 @@
   },
   "dependencies": {
     "@fingerprintjs/fingerprintjs": "^3.3.0",
+    "@prisma/client": "^2.29.1",
     "axios": "^0.21.1",
     "everycolor": "^1.0.0-alpha.2",
     "next": "^11.1.0",
     "react": "^17.0.2",
     "react-copy-to-clipboard": "^5.0.3",
     "react-dom": "^17.0.2",
-    "seed-color": "^2.0.1"
+    "seed-color": "^2.0.1",
+    "uuid": "^8.3.2"
   }
 }

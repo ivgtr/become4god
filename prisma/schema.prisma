@@ -1,0 +1,20 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Wesensglieder {
+  id        Int     @default(autoincrement()) @id
+  row       Int
+  material  String[]
+}
+
+model Info {  
+  id          Int     @default(autoincrement()) @id
+  count       Int
+  updated_at    DateTime @default(now())
+}
