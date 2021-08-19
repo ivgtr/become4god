@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-
 import { fromRGB } from "everycolor";
+import React, { useEffect, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const toRGB = (hex: string) => {
@@ -14,9 +13,7 @@ const toRGB = (hex: string) => {
       hex.slice(2, 3) +
       hex.slice(2, 3);
 
-  return [hex.slice(0, 2), hex.slice(2, 4), hex.slice(4, 6)].map((str) => {
-    return parseInt(str, 16);
-  });
+  return [hex.slice(0, 2), hex.slice(2, 4), hex.slice(4, 6)].map((str) => parseInt(str, 16));
 };
 
 export const UserInfo: React.VFC<{ color: string }> = ({ color }) => {

@@ -1,8 +1,7 @@
 import React from "react";
-
-import { PageHeader } from "../components/PageHeader";
-import { PageFooter } from "../components/PageFooter";
 import { PageContent } from "../components/PageContent";
+import { PageFooter } from "../components/PageFooter";
+import { PageHeader } from "../components/PageHeader";
 
 export default function Home() {
   return (
