@@ -15,9 +15,9 @@ const readUser = (): User | undefined => {
 
 export const PageContent = () => {
   const [userColor, setUserColor] = useState<string>("");
-  const [colors, setColors] = useState<{ canvas: string[][]; count: number }>({
+  const [colors, setColors] = useState<{ canvas: string[][]; times: number }>({
     canvas: [],
-    count: 0,
+    times: 0,
   });
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export const PageContent = () => {
           </main>
           <div className="text-center">
             <p>
-              All users played <span className="font-bold">{colors.count} times</span>
+              All users played <span className="font-bold">{colors.times} times</span>
             </p>
           </div>
           <Description />
