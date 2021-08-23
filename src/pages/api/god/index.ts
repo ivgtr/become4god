@@ -5,15 +5,24 @@ import { GodResponse } from "../../../types/type";
 const handler = async (req: NextApiRequest, res: NextApiResponse<GodResponse>) => {
   try {
     if (req.method === "POST") {
-      const { count } = await prisma.info.update({
+      const data = await prisma.info.findUnique({
         where: { id: 1 },
-        data: { count: { increment: 1 } },
+        include: {
+          canvas: {
+            select: {
+              dots: true,
+            },
+          },
+        },
       });
-
       res.status(200);
-      // res.setHeader("Content-Type", `image/${option.type}`);
       res.setHeader("Cache-Control", "public, max-age=86400");
-      res.end(JSON.stringify({ canvas: [], count }));
+      res.end(
+        JSON.stringify({
+          canvas: data?.canvas.map((canvas) => canvas.dots),
+          times: data?.times ?? 0,
+        })
+      );
     } else {
       res.status(500);
       res.end();
