@@ -7,14 +7,18 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Wesensglieder {
-  id        Int     @default(autoincrement()) @id
-  row       Int
-  material  String[]
+model Info {
+  id         Int      @id @default(autoincrement())
+  times      Int
+  canvas     Canvas[] @relation("canvas")
+  updated_at DateTime @updatedAt
 }
 
-model Info {  
-  id          Int     @default(autoincrement()) @id
-  count       Int
-  updated_at    DateTime @default(now())
+model Canvas {
+  id         Int      @id @default(autoincrement())
+  row        Int      @unique
+  dots       String[]
+  updated_at DateTime @updatedAt
+  info       Info?    @relation(name: "canvas", fields: [infoId], references: [id])
+  infoId     Int?
 }
